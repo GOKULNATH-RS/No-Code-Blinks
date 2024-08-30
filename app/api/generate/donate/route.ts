@@ -1,3 +1,7 @@
+import dbConnect from '@/db/dbConnect'
+import DonateBlink from '@/db/models/DonateBlink'
+import console, { Console } from 'console'
+
 export const POST = async (req: Request) => {
   try {
     // {
@@ -29,7 +33,6 @@ export const POST = async (req: Request) => {
     //     }
     //   ]
     // },
-
     const reqUrl = new URL(req.url)
     const baseUrl = reqUrl.origin
 
@@ -46,13 +49,13 @@ export const POST = async (req: Request) => {
           }
         })
         return {
-          label: action.label,
+          label: `Donate SOL`,
           href: `${baseUrl}/api/actions/donate?id=${blinkId}&to=${toPubKey}&amount={amount}`,
           parameters
         }
       }
       return {
-        label: action.label,
+        label: `Donate ${action.amount} SOL`,
         href: `${baseUrl}/api/actions/donate?id=${blinkId}&to=${toPubKey}&amount=${action.amount}`
       }
     })
@@ -61,16 +64,23 @@ export const POST = async (req: Request) => {
       blinkId,
       title,
       description,
-      label,
+      label: 'Donate SOL',
       icon,
       toPubKey,
       actions
     }
 
-    console.log(payload)
+    await dbConnect()
 
-    return Response.json({ message: 'success' })
+    const donateBlink = new DonateBlink(payload)
+    await donateBlink.save()
+    console.log('DONATE BLINK created', donateBlink)
+
+    const blink = `${baseUrl}/donate?id=${blinkId}`
+
+    return Response.json({ message: 'success', blink })
   } catch (error) {
+    console.error(error)
     return Response.json({ error: 'Server error' }, { status: 500 })
   }
 }

@@ -1,41 +1,63 @@
 'use client'
 
 import { useAppData } from '@/context/AppDataContext'
-import React, { useState } from 'react'
-
-const input = [
-  {
-    label: 'Title',
-    placeholder: '',
-    type: 'text',
-    className: '',
-    deleteBtn: false
-  },
-  {
-    label: 'Description',
-    placeholder: '',
-    type: 'text',
-    className: '',
-    deleteBtn: false
-  },
-  {
-    label: 'Image Url',
-    placeholder: '',
-    type: 'text',
-    className: '',
-    deleteBtn: false
-  },
-  {
-    label: 'Destination wallet address',
-    placeholder: '',
-    type: 'text',
-    className: '',
-    deleteBtn: false
-  }
-]
+import { useFormData } from '@/context/FormContext'
 
 const StepOne = () => {
   const { currStep, setCurrStep } = useAppData()
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    imageUrl,
+    setImageUrl,
+    destinationWalletAddress,
+    setDestinationWalletAddress
+  } = useFormData()
+
+  const input = [
+    {
+      label: 'Title',
+      placeholder: '',
+      type: 'text',
+      className: '',
+      deleteBtn: false,
+      onChangeFn: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setTitle(e.target.value),
+      value: title
+    },
+    {
+      label: 'Description',
+      placeholder: '',
+      type: 'text',
+      className: '',
+      deleteBtn: false,
+      onChangeFn: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setDescription(e.target.value),
+      value: description
+    },
+    {
+      label: 'Image Url',
+      placeholder: '',
+      type: 'text',
+      className: '',
+      deleteBtn: false,
+      onChangeFn: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setImageUrl(e.target.value),
+      value: imageUrl
+    },
+    {
+      label: 'Destination wallet address',
+      placeholder: '',
+      type: 'text',
+      className: '',
+      deleteBtn: false,
+      onChangeFn: (e: React.ChangeEvent<HTMLInputElement>) =>
+        setDestinationWalletAddress(e.target.value),
+      value: destinationWalletAddress
+    }
+  ]
 
   return (
     <div className='flex items-center flex-col gap-10'>
@@ -50,7 +72,9 @@ const StepOne = () => {
               <div className='p-[1px] rounded-[15px] gradient_700_800 w-max'>
                 <input
                   type={inp.type}
+                  value={inp.value}
                   placeholder={inp.placeholder}
+                  onChange={inp.onChangeFn}
                   className='px-2 h-12 w-[320px] rounded-[14px] bg-jaguar-950'
                 />
               </div>

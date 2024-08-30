@@ -4,6 +4,7 @@ import localfont from 'next/font/local'
 import './globals.css'
 
 import { AppDataContextProvider } from '@/context/AppDataContext'
+import { FormDataContextProvider } from '@/context/FormContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} ${powerGrotesk.variable}`}>
-        <AppDataContextProvider>{children}</AppDataContextProvider>
+        <AppDataContextProvider>
+          <FormDataContextProvider>{children}</FormDataContextProvider>
+        </AppDataContextProvider>
       </body>
     </html>
   )

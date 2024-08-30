@@ -16,7 +16,7 @@ const input = [
 ]
 
 const StepTwo = () => {
-  const { currStep, setCurrStep } = useAppData()
+  const { currStep, setCurrStep, blink } = useAppData()
 
   return (
     <div className='flex items-center flex-col gap-10'>
@@ -29,8 +29,8 @@ const StepTwo = () => {
             <div className='p-[1px] rounded-[15px] gradient_700_800 w-max'>
               <input
                 type='text'
-                value='https://www.google.com'
-                className='px-2 h-12 w-[500px] rounded-[14px] bg-jaguar-950'
+                value={blink}
+                className='px-2 h-12 w-[500px] rounded-[14px] bg-jaguar-950 overflow-hidden'
               />
             </div>
           </div>
@@ -46,22 +46,25 @@ const StepTwo = () => {
               currStep === 1 ? 'opacity-50' : ''
             }`}
           >
-            <button
-              onClick={() => alert('X shared')}
+            <a
               className={`flex-center  h-12 w-52 gradient_hero rounded-xl`}
+              href={`https://twitter.com/intent/tweet?text=${blink}`}
+              target='_blank'
             >
               Share on X
-            </button>
+            </a>
           </div>
+
           <div
             className={`gradient_700_800 h-max w-max m-2 rounded-xl p-[1px]`}
           >
-            <button
-              onClick={() => alert('copied')}
+            <a
+              href={`https://dial.to/developer?url=${blink}`}
+              target='_blank'
               className={`flex-center  h-12 w-52 gradient_700_800 rounded-xl`}
             >
-              Copy Link
-            </button>
+              Preview
+            </a>
           </div>
           {/* Button End */}
         </div>

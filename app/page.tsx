@@ -15,6 +15,14 @@ export default function Home() {
         <div className='flex flex-col items-center my-6 z-[2]'>
           <h1 className='text-[70px] leading-[1]'>Blinks ,made Easy</h1>
           <h1 className='text-[26px]'>Generate Blinks with few clicks</h1>
+          <div className={`gradient_700_800 h-max w-max m-4 rounded-xl`}>
+            <button
+              className={`flex-center h-10 w-52 gradient_600_700 bg-opacity-70 text-xl 
+            rounded-xl`}
+            >
+              Generate
+            </button>
+          </div>
         </div>
 
         <div className='relative'>

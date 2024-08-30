@@ -1,3 +1,5 @@
+import dbConnect from '@/db/dbConnect'
+
 import {
   ActionGetResponse,
   ActionPostRequest,
@@ -14,38 +16,26 @@ import {
   SystemProgram,
   Transaction
 } from '@solana/web3.js'
-
-/**
- * INFO: data from client side
- *
- * title,
- * description,
- * icon,
- * amount,
- * label,
- * actions[]
- * toPubKey
- */
+import DonateBlink from '@/db/models/DonateBlink'
 
 const headers = createActionHeaders()
 
-export const GET = (req: Request) => {
+export const GET = async (req: Request) => {
   try {
     const reqUrl = new URL(req.url)
 
-    const id = reqUrl.searchParams.get('id')
+    const id: any = reqUrl.searchParams.get('id')
 
-    const payloadData = getData(Number(id))
-    const { title, description, icon, actions, label } = payloadData
+    const payloadData: any = await getData(id)
 
     const payload: ActionGetResponse = {
       type: 'action',
-      title: title || '',
-      icon: icon || '',
-      description: description || '',
-      label: label || 'Donate',
+      title: payloadData.title || '',
+      icon: payloadData.icon || '',
+      description: payloadData.description || '',
+      label: payloadData.label || 'Donate',
       links: {
-        actions: actions || []
+        actions: payloadData.actions || []
       }
     }
 
@@ -110,79 +100,10 @@ export const POST = async (req: Request) => {
   }
 }
 
-function getData(id: number) {
-  const payloadsfromDB = [
-    {
-      id: 8192,
-      title: 'title',
-      description: 'desc',
-      label: 'Donate SOL',
-      icon: 'https://i.seadn.io/gae/ulTNkL1s8SxAEkwH4pxkHxMYh2r5HJeBRcURychonbbelmY7Yg1mFkJUS_toAPVTTBGqDtuc1dq5ZwsJv9fUQ0h12f5M919x10wmaUU?auto=format&dpr=1&w=1000',
-      toPubKey: '2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW',
-      actions: [
-        {
-          label: 'Donate 5 SOL',
-          href: 'http://localhost:3000/api/actions/donate?id=2&to=2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW&amount=5'
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Donate Me',
-      description: 'Donation for me',
-      label: 'Donate SOL',
-      icon: 'https://i.seadn.io/gae/ulTNkL1s8SxAEkwH4pxkHxMYh2r5HJeBRcURychonbbelmY7Yg1mFkJUS_toAPVTTBGqDtuc1dq5ZwsJv9fUQ0h12f5M919x10wmaUU?auto=format&dpr=1&w=1000',
-      toPubKey: '2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW',
-      actions: [
-        {
-          label: 'Donate 0.2 SOL',
-          href: 'http://localhost:3000/api/actions/donate?id=2&to=2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW&amount=0.2'
-        },
-        {
-          label: 'Donate 0.5 SOL',
-          href: 'http://localhost:3000/api/actions/donate?id=2&to=2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW&amount=0.5'
-        },
-        {
-          label: 'Donate SOL',
-          href: 'http://localhost:3000/api/actions/donate?id=2&to=2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW&amount={amount}',
-          parameters: [
-            {
-              name: 'amount',
-              label: 'Enter the SOL',
-              required: true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: 3,
-      title: 'Life Donate',
-      description: 'Donation for life',
-      label: 'Donate SOL',
-      icon: 'https://i.seadn.io/gae/ulTNkL1s8SxAEkwH4pxkHxMYh2r5HJeBRcURychonbbelmY7Yg1mFkJUS_toAPVTTBGqDtuc1dq5ZwsJv9fUQ0h12f5M919x10wmaUU?auto=format&dpr=1&w=1000',
-      toPubKey: '8sd6ThQ9fG8ypeNLhL6wzxNiPwdJ7ptyguzXiTmsHPAV',
-      actions: [
-        {
-          label: 'Donate 0.002 SOL',
-          href: 'http://localhost:3000/api/actions/donate?id=2&to=2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW&amount=0.002'
-        },
-        {
-          label: 'Donate 0.005 SOL',
-          href: 'http://localhost:3000/api/actions/donate?id=2&to=2PC9WaqoSReSRLEYFGTBDCSuknZ7UkZaga1xE76MujtW&amount=0.005'
-        }
-      ]
-    }
-  ]
+async function getData(id: string) {
+  await dbConnect()
 
-  const data = payloadsfromDB.find((payload) => payload.id === id)
+  const payloadsfromDB = await DonateBlink.find({ blinkId: id })
 
-  return {
-    title: data?.title,
-    description: data?.description,
-    label: data?.label,
-    icon: data?.icon,
-    toPubKey: new PublicKey(data?.toPubKey || '').toBase58(),
-    actions: data?.actions
-  }
+  return payloadsfromDB[0]
 }
