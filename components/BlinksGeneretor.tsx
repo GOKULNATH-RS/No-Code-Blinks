@@ -10,8 +10,8 @@ import StepThree from './StepThree'
 const BlinksGeneretor = () => {
   const { currStep } = useAppData()
   return (
-    <div className='flex justify-between items-center my-12 py-12'>
-      <div className='flex-1'>
+    <div className='flex justify-between my-12 py-12'>
+      <div className='flex-1 max-lg:hidden'>
         <Blink />
       </div>
       <div className='flex-1 flex flex-col justify-between relative min-h-32'>

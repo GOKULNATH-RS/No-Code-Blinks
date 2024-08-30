@@ -8,9 +8,9 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <>
-      <div className='text-white gradient_hero min-h-screen font-powerGrotesk px-40 py-8'>
+      <div className='text-white gradient_hero min-h-screen font-powerGrotesk px-40 py-8 max-sm:hidden'>
         <Header />
-        <main className='w-full flex-center flex-col gap-4 my-8'>
+        <main className='w-full flex-center flex-col gap-4 my-8 '>
           <div className='flex flex-col items-center my-6 z-[2]'>
             <h1 className='text-[70px] leading-[1]'>Blinks ,made Easy</h1>
             <h1 className='text-[26px]'>Generate Blinks with few clicks</h1>
@@ -40,6 +40,11 @@ export default function Home() {
         <div id='generate'>
           <BlinksGeneretor />
         </div>
+      </div>
+      <div className='hidden max-sm:block h-screen w-screen gradient_hero text-white font-powerGrotesk'>
+        <p className='w-full h-full flex-center'>
+          Use Desktop for better experience
+        </p>
       </div>
     </>
   )
