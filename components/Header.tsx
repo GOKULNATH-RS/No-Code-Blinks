@@ -14,7 +14,6 @@ const Header = () => {
 
   useEffect(() => {
     setDestinationWalletAddress(publicKey?.toBase58() || '')
-    console.log('publicKey', destinationWalletAddress)
   }, [publicKey])
 
   return (

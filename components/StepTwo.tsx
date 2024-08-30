@@ -7,6 +7,7 @@ import { useAppData } from '@/context/AppDataContext'
 import { v4 } from 'uuid'
 import axios from 'axios'
 import { useFormData } from '@/context/FormContext'
+import { toast } from 'sonner'
 
 const StepTwo = () => {
   const { currStep, setCurrStep, setBlink } = useAppData()
@@ -64,27 +65,35 @@ const StepTwo = () => {
     amounts[amounts.length - 1].value = value
 
     const amountsValue = amounts.map((amount: any) => {
-      console.log('Amount', amount)
       return { amount: amount.value }
     })
     setActionAmount(amountsValue)
 
-    console.log('server url', process.env.NEXT_PUBLIC_SERVER_URL)
-
-    axios
-      .post(`/api/generate/donate`, {
-        blinkId: v4(),
-        title,
-        description,
-        icon: imageUrl,
-        toPubKey: destinationWalletAddress,
-        actions: amountsValue
-      })
-      .then((res) => {
-        setBlink(res.data.blink)
-        setCurrStep(currStep + 1)
-        console.log(res.data)
-      })
+    toast.promise(
+      axios
+        .post(`/api/generate/donate`, {
+          blinkId: v4(),
+          title,
+          description,
+          icon: imageUrl,
+          toPubKey: destinationWalletAddress,
+          actions: amountsValue
+        })
+        .then((res) => {
+          setBlink(res.data.blink)
+          setCurrStep(currStep + 1)
+        }),
+      {
+        loading: 'Generating...',
+        success: 'Blink generated successfully',
+        error: 'Error while generating blink',
+        style: {
+          background: '#0a0613',
+          color: '#fff',
+          borderWidth: '0px'
+        }
+      }
+    )
   }
 
   return (

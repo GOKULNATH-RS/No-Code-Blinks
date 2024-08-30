@@ -2,6 +2,7 @@
 
 import { useAppData } from '@/context/AppDataContext'
 import { useFormData } from '@/context/FormContext'
+import { toast } from 'sonner'
 
 const StepOne = () => {
   const { currStep, setCurrStep } = useAppData()
@@ -59,6 +60,25 @@ const StepOne = () => {
     }
   ]
 
+  function handleNextStep() {
+    if (
+      title === '' ||
+      description === '' ||
+      imageUrl === '' ||
+      destinationWalletAddress === ''
+    ) {
+      toast.error('Please fill all the fields', {
+        style: {
+          background: '#0a0613',
+          color: '#fff',
+          borderWidth: '0px'
+        }
+      })
+      return
+    }
+    setCurrStep(2)
+  }
+
   return (
     <div className='flex items-center flex-col gap-10'>
       <div className='flex-center flex-col gap-2'>
@@ -100,7 +120,7 @@ const StepOne = () => {
         </div>
         <div className={`gradient_700_800 h-max w-max m-2 rounded-xl p-[1px]`}>
           <button
-            onClick={() => setCurrStep(currStep + 1)}
+            onClick={() => handleNextStep()}
             className={`flex-center  h-12 w-52 gradient_700_800 rounded-xl`}
           >
             Next Step
