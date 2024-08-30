@@ -5,6 +5,7 @@ import './globals.css'
 
 import { AppDataContextProvider } from '@/context/AppDataContext'
 import { FormDataContextProvider } from '@/context/FormContext'
+import AppWalletProvider from '@/components/AppWalletProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,9 +32,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} ${powerGrotesk.variable}`}>
-        <AppDataContextProvider>
-          <FormDataContextProvider>{children}</FormDataContextProvider>
-        </AppDataContextProvider>
+        <AppWalletProvider>
+          <AppDataContextProvider>
+            <FormDataContextProvider>{children}</FormDataContextProvider>
+          </AppDataContextProvider>
+        </AppWalletProvider>
       </body>
     </html>
   )

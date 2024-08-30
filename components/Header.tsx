@@ -1,7 +1,22 @@
+'use client'
+
 import Image from 'next/image'
 import logo from '../assets/BlinksEasy.svg'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { useEffect } from 'react'
+import { useFormData } from '@/context/FormContext'
 
 const Header = () => {
+  const { publicKey } = useWallet()
+  const { setDestinationWalletAddress, destinationWalletAddress } =
+    useFormData()
+
+  useEffect(() => {
+    setDestinationWalletAddress(publicKey?.toBase58() || '')
+    console.log('publicKey', destinationWalletAddress)
+  }, [publicKey])
+
   return (
     <nav className='flex justify-between'>
       <div>
@@ -16,7 +31,13 @@ const Header = () => {
             className={`flex-center h-12 w-52 gradient_600_700 bg-opacity-70
             rounded-xl`}
           >
-            Connect
+            <WalletMultiButton
+              style={{
+                backgroundColor: 'transparent',
+                height: '100%',
+                width: '100%'
+              }}
+            />
           </button>
         </div>
       </div>
