@@ -67,26 +67,19 @@ const StepTwo = () => {
       console.log('Amount', amount)
       return { amount: amount.value }
     })
-    console.log('Amounts value', amountsValue)
     setActionAmount(amountsValue)
 
-    console.log('actionAmount', actionAmount)
-    // { blinkId, title, description, icon, label, toPubKey }
+    console.log('server url', process.env.NEXT_PUBLIC_SERVER_URL)
 
     axios
-      .post(
-        `${
-          process.env.NEXT_SERVER_URL || 'http://localhost:3000'
-        }/api/generate/donate`,
-        {
-          blinkId: v4(),
-          title,
-          description,
-          icon: imageUrl,
-          toPubKey: destinationWalletAddress,
-          actions: amountsValue
-        }
-      )
+      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/generate/donate`, {
+        blinkId: v4(),
+        title,
+        description,
+        icon: imageUrl,
+        toPubKey: destinationWalletAddress,
+        actions: amountsValue
+      })
       .then((res) => {
         setBlink(res.data.blink)
         setCurrStep(currStep + 1)
