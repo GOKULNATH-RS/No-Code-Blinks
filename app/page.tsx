@@ -1,40 +1,11 @@
-import Button from '@/ui/Button'
-import { Input } from '@/ui/Input'
-import removeIcon from '../assets/icons/del-icon.svg'
 import Image from 'next/image'
-import { type } from 'os'
 import Header from '@/components/Header'
 import heroImg from '../assets/hero-img.png'
 import BlinksGeneretor from '@/components/BlinksGeneretor'
-import { Head } from 'next/document'
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>BlinksEasy</title>
-        <meta property='og:title' content='BlinksEasy' />
-        <meta property='og:type' content='website' />
-        <meta
-          property='og:url'
-          content='https://blinkseasy.gokulnathrs.tech/'
-        />
-        <meta
-          property='og:image'
-          content='https://blinkseasy.gokulnathrs.tech/_next/static/media/BlinksEasy.f68b048e.svg'
-        />
-        <meta
-          property='og:description'
-          content='Generate Blinks with few clicks'
-        />
-        <meta property='og:site_name' content='BlinksEasy' />
-        <meta property='og:locale' content='en_US' />
-
-        <meta
-          name='description'
-          content='BlinksEasy allows you to generate Blinks with few clicks.'
-        />
-      </Head>
       <div className='text-white gradient_hero min-h-screen font-powerGrotesk px-40 py-8'>
         <Header />
         <main className='w-full flex-center flex-col gap-4 my-8'>
