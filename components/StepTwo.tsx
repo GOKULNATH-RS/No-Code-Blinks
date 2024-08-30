@@ -72,7 +72,7 @@ const StepTwo = () => {
     console.log('server url', process.env.NEXT_PUBLIC_SERVER_URL)
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/generate/donate`, {
+      .post(`/api/generate/donate`, {
         blinkId: v4(),
         title,
         description,
