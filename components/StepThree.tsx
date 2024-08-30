@@ -1,22 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import removeIcon from '../assets/icons/del-icon.svg'
+import copyIcon from '../assets/icons/copy-icon.png'
+import tickIcon from '../assets/icons/tick-icon.png'
 import Image from 'next/image'
 import { useAppData } from '@/context/AppDataContext'
-
-const input = [
-  {
-    label: 'Enter Amount',
-    placeholder: '',
-    type: 'number',
-    className: '',
-    deleteBtn: true
-  }
-]
+import { toast } from 'sonner'
+import { useState } from 'react'
 
 const StepTwo = () => {
-  const { currStep, setCurrStep, blink } = useAppData()
+  const { currStep, blink } = useAppData()
+  const [icon, setIcon] = useState(copyIcon)
 
   return (
     <div className='flex items-center flex-col gap-10'>
@@ -32,6 +25,25 @@ const StepTwo = () => {
                 value={blink}
                 className='px-2 h-12 w-[500px] rounded-[14px] bg-jaguar-950 overflow-hidden'
               />
+            </div>
+            <div className=''>
+              <div
+                onClick={() =>
+                  navigator.clipboard.writeText(blink).then(() => {
+                    setIcon(tickIcon)
+                    toast.success('Copied to clipboard', {
+                      style: {
+                        background: '#0a0613',
+                        color: '#fff',
+                        borderWidth: '0px'
+                      }
+                    })
+                  })
+                }
+                className='rounded-xl p-2 cursor-pointer'
+              >
+                <Image src={icon} alt='remove' />
+              </div>
             </div>
           </div>
         </div>

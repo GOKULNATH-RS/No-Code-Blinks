@@ -27,7 +27,7 @@ const Header = () => {
           `}
         >
           <button
-            className={`flex-center h-12 w-52 gradient_600_700 bg-opacity-70
+            className={`flex-center max-h-12 max-w-52 gradient_600_700 bg-opacity-70
             rounded-xl`}
           >
             <WalletMultiButton
