@@ -27,7 +27,7 @@ const StepTwo = () => {
       placeholder: '',
       value: value,
       setValue: setValue,
-      deleteBtn: true
+      deleteBtn: false
     }
   ])
 
@@ -42,7 +42,7 @@ const StepTwo = () => {
         placeholder: '',
         value: value,
         setValue: setValue,
-        deleteBtn: true
+        deleteBtn: false
       }
     ])
 
