@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import heroImg from '../assets/hero-img.png'
 import BlinksGeneretor from '@/components/BlinksGeneretor'
+import Head from 'next/head'
 
 export default function Home() {
   return (

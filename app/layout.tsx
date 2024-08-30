@@ -5,7 +5,6 @@ import './globals.css'
 
 import { AppDataContextProvider } from '@/context/AppDataContext'
 import { FormDataContextProvider } from '@/context/FormContext'
-import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,30 +30,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <Head>
-        <title>BlinksEasy</title>
-        <meta property='og:title' content='BlinksEasy' />
-        <meta property='og:type' content='website' />
-        <meta
-          property='og:url'
-          content='https://blinkseasy.gokulnathrs.tech/'
-        />
-        <meta
-          property='og:image'
-          content='https://blinkseasy.gokulnathrs.tech/_next/static/media/BlinksEasy.f68b048e.svg'
-        />
-        <meta
-          property='og:description'
-          content='Generate Blinks with few clicks'
-        />
-        <meta property='og:site_name' content='BlinksEasy' />
-        <meta property='og:locale' content='en_US' />
-
-        <meta
-          name='description'
-          content='BlinksEasy allows you to generate Blinks with few clicks.'
-        />
-      </Head>
       <body className={`${inter.className} ${powerGrotesk.variable}`}>
         <AppDataContextProvider>
           <FormDataContextProvider>{children}</FormDataContextProvider>
