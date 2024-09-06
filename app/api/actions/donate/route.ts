@@ -65,7 +65,7 @@ export const POST = async (req: Request) => {
     }
 
     const connection = new Connection(
-      process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
+      process.env.SOLANA_RPC_URL || clusterApiUrl('devnet'),
       'confirmed'
     )
 
