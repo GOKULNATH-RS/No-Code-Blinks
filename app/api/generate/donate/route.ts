@@ -74,7 +74,6 @@ export const POST = async (req: Request) => {
 
     const donateBlink = new DonateBlink(payload)
     await donateBlink.save()
-    console.log('DONATE BLINK created', donateBlink)
 
     const blink = `${baseUrl}/donate?id=${blinkId}`
     const xBlink = `${baseUrl}/api/actions/donate?id=${blinkId}`

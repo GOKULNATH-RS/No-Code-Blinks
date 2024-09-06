@@ -64,7 +64,10 @@ export const POST = async (req: Request) => {
       return Response.json({ error: 'Invalid account' }, { headers })
     }
 
-    const connection = new Connection(clusterApiUrl('devnet'))
+    const connection = new Connection(
+      process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
+      'confirmed'
+    )
 
     const minimumBalance = await connection.getMinimumBalanceForRentExemption(0)
 

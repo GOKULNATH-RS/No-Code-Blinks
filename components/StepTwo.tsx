@@ -50,14 +50,11 @@ const StepTwo = () => {
   }
 
   function handleDeleteAmount(id: string) {
-    console.log('ID', id)
-    console.log('Amounts BEFORE ', amounts)
     const newAmounts = amounts.filter((amount: any) => {
       if (amount.id !== id) {
         return amount
       }
     })
-    console.log('Amounts AFTER ', amounts)
     setAmounts(newAmounts)
   }
 

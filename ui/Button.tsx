@@ -1,5 +1,4 @@
 const Button = ({ label, className, border, bg, dashed }: any) => {
-  console.log('Button rendered : ', dashed)
   return (
     <div
       className={`gradient_700_800 h-max w-max m-2 rounded-xl ${
