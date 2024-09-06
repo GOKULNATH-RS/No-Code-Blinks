@@ -14,7 +14,7 @@ const BlinksGeneretor = () => {
       <div className='flex-1 max-lg:hidden'>
         <Blink />
       </div>
-      <div className='flex-1 flex flex-col justify-between relative min-h-32'>
+      <div className='flex-1 flex flex-col justify-center gap-8  relative min-h-32'>
         <StepNav />
         {currStep === 1 && <StepOne />}
         {currStep === 2 && <StepTwo />}

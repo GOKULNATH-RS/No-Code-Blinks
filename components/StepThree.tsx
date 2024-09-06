@@ -13,7 +13,7 @@ const StepTwo = () => {
 
   return (
     <div className='flex items-center flex-col gap-10'>
-      <div className='flex-center flex-col gap-2'>
+      <div className='flex-center flex-col gap-2 '>
         <div className={`flex flex-col gap-1 `}>
           <label htmlFor='title' className='text-lg px-2'>
             Your Blink
@@ -60,7 +60,7 @@ const StepTwo = () => {
           >
             <a
               className={`flex-center  h-12 w-52 gradient_hero rounded-xl`}
-              href={`https://twitter.com/intent/tweet?text=${blink}`}
+              href={`https://twitter.com/intent/tweet?text=https://dial.to/?action=solana-action:${blink}`}
               target='_blank'
             >
               Share on X
