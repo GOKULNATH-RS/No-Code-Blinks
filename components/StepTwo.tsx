@@ -10,7 +10,7 @@ import { useFormData } from '@/context/FormContext'
 import { toast } from 'sonner'
 
 const StepTwo = () => {
-  const { currStep, setCurrStep, setBlink } = useAppData()
+  const { currStep, setCurrStep, setBlink, setXBlink } = useAppData()
   const {
     title,
     description,
@@ -81,6 +81,7 @@ const StepTwo = () => {
         })
         .then((res) => {
           setBlink(res.data.blink)
+          setXBlink(res.data.xBlink)
           setCurrStep(currStep + 1)
         }),
       {

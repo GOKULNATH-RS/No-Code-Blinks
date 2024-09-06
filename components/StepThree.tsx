@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 import { useState } from 'react'
 
 const StepTwo = () => {
-  const { currStep, blink } = useAppData()
+  const { currStep, blink, xBlink } = useAppData()
   const [icon, setIcon] = useState(copyIcon)
 
   return (
@@ -29,7 +29,7 @@ const StepTwo = () => {
             <div className=''>
               <div
                 onClick={() =>
-                  navigator.clipboard.writeText(blink).then(() => {
+                  navigator.clipboard.writeText(xBlink).then(() => {
                     setIcon(tickIcon)
                     toast.success('Copied to clipboard', {
                       style: {
@@ -60,7 +60,7 @@ const StepTwo = () => {
           >
             <a
               className={`flex-center  h-12 w-52 gradient_hero rounded-xl`}
-              href={`https://twitter.com/intent/tweet?text=https://dial.to/?action=solana-action:${blink}`}
+              href={`https://twitter.com/intent/tweet?text=https://dial.to/?action=solana-action:${xBlink}`}
               target='_blank'
             >
               Share on X

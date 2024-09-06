@@ -18,9 +18,12 @@ type Props = {
 export const AppDataContextProvider = ({ children }: Props) => {
   const [currStep, setCurrStep] = useState(1)
   const [blink, setBlink] = useState('')
+  const [xBlink, setXBlink] = useState('')
 
   return (
-    <AppDataContext.Provider value={{ currStep, setCurrStep, blink, setBlink }}>
+    <AppDataContext.Provider
+      value={{ currStep, setCurrStep, blink, setBlink, xBlink, setXBlink }}
+    >
       {children}
     </AppDataContext.Provider>
   )

@@ -77,8 +77,9 @@ export const POST = async (req: Request) => {
     console.log('DONATE BLINK created', donateBlink)
 
     const blink = `${baseUrl}/donate?id=${blinkId}`
+    const xBlink = `${baseUrl}/api/actions/donate?id=${blinkId}`
 
-    return Response.json({ message: 'success', blink })
+    return Response.json({ message: 'success', blink, xBlink })
   } catch (error) {
     console.error(error)
     return Response.json({ error: 'Server error' }, { status: 500 })
