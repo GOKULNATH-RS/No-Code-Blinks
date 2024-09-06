@@ -29,16 +29,20 @@ const StepTwo = () => {
             <div className=''>
               <div
                 onClick={() =>
-                  navigator.clipboard.writeText(xBlink).then(() => {
-                    setIcon(tickIcon)
-                    toast.success('Copied to clipboard', {
-                      style: {
-                        background: '#0a0613',
-                        color: '#fff',
-                        borderWidth: '0px'
-                      }
+                  navigator.clipboard
+                    .writeText(
+                      `https://dial.to/?action=solana-action:${xBlink}`
+                    )
+                    .then(() => {
+                      setIcon(tickIcon)
+                      toast.success('Copied to clipboard', {
+                        style: {
+                          background: '#0a0613',
+                          color: '#fff',
+                          borderWidth: '0px'
+                        }
+                      })
                     })
-                  })
                 }
                 className='rounded-xl p-2 cursor-pointer'
               >
