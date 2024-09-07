@@ -1,6 +1,5 @@
 import dbConnect from '@/db/dbConnect'
 import DonateBlink from '@/db/models/DonateBlink'
-import console, { Console } from 'console'
 
 export const POST = async (req: Request) => {
   try {
@@ -37,28 +36,31 @@ export const POST = async (req: Request) => {
     const baseUrl = reqUrl.origin
 
     const body = await req.json()
-    const { blinkId, title, description, icon, label, toPubKey } = body
+    const { blinkId, title, description, icon, label, toPubKey, customInput } =
+      body
 
-    const actions = body.actions.map((action: any) => {
-      if (action.parameters) {
-        const parameters = action.parameters.map((parameter: any) => {
-          return {
-            name: parameter.name,
-            label: parameter.label,
-            required: parameter.required
-          }
-        })
-        return {
-          label: `Donate SOL`,
-          href: `${baseUrl}/api/actions/donate?id=${blinkId}&to=${toPubKey}&amount={amount}`,
-          parameters
-        }
-      }
+    var actions = body.actions.map((action: any) => {
       return {
         label: `Donate ${action.amount} SOL`,
         href: `${baseUrl}/api/actions/donate?id=${blinkId}&to=${toPubKey}&amount=${action.amount}`
       }
     })
+
+    if (customInput) {
+      actions.push({
+        label: `Donate SOL`,
+        href: `${baseUrl}/api/actions/donate?id=${blinkId}&to=${toPubKey}&amount={amount}`,
+        parameters: [
+          {
+            name: 'amount',
+            label: 'Enter the SOL',
+            required: true
+          }
+        ]
+      })
+    }
+
+    console.log(actions)
 
     const payload = {
       blinkId,

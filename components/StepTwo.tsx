@@ -20,6 +20,7 @@ const StepTwo = () => {
     setActionAmount
   } = useFormData()
   const [value, setValue] = useState('0')
+  const [customInput, setCustomInput] = useState(false)
   const [amounts, setAmounts] = useState<any>([
     {
       id: v4(),
@@ -74,7 +75,8 @@ const StepTwo = () => {
           description,
           icon: imageUrl,
           toPubKey: destinationWalletAddress,
-          actions: amountsValue
+          actions: amountsValue,
+          customInput
         })
         .then((res) => {
           setBlink(res.data.blink)
@@ -145,6 +147,7 @@ const StepTwo = () => {
             id='input-checkbox'
             type='checkbox'
             value=''
+            onChange={() => setCustomInput(!customInput)}
             className='w-4 h-4 text-jaguar-600 bg-jaguar-950 border-jaguar-600 rounded-xl'
           />
           <label htmlFor='input-checkbox'>Add a custom input </label>
