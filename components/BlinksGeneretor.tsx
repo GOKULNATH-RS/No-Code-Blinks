@@ -11,7 +11,7 @@ const BlinksGeneretor = () => {
   const { currStep } = useAppData()
   return (
     <div className='flex justify-between my-12 py-12'>
-      <div className='flex-1 max-lg:hidden'>
+      <div className='flex-1 flex-center max-lg:hidden'>
         <Blink />
       </div>
       <div className='flex-1 flex flex-col justify-center gap-8  relative min-h-32'>

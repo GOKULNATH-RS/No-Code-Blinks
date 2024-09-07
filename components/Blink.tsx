@@ -1,5 +1,5 @@
 import React from 'react'
-import blink from '../assets/Blink.png'
+import blink from '../assets/Blink.svg'
 import Image from 'next/image'
 
 const Blink = () => {
