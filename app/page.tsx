@@ -4,6 +4,7 @@ import heroImg from '../assets/hero-img.png'
 import BlinksGeneretor from '@/components/BlinksGeneretor'
 import Head from 'next/head'
 import Link from 'next/link'
+import downArrow from '../assets/icons/arrow-down.svg'
 
 export default function Home() {
   return (
@@ -14,14 +15,21 @@ export default function Home() {
           <div className='flex flex-col items-center my-6 z-[2]'>
             <h1 className='text-[70px] leading-[1]'>Blinks ,made Easy</h1>
             <h1 className='text-[26px]'>Generate Blinks with few clicks</h1>
-            <div className={`gradient_700_800 h-max w-max m-4 rounded-xl`}>
-              <Link
+            <div className={` h-max w-max m-4 mt-8 flex gap-1 items-end`}>
+              {/* <Link
                 href='#generate'
                 className={`flex-center h-10 w-52 gradient_600_700 bg-opacity-70 text-xl
                 rounded-xl`}
               >
                 Generate
               </Link>
+               */}
+              <p className=''>Scroll down to generate</p>
+              <Image
+                src={downArrow}
+                alt='arrow-down'
+                className='h-5 w-5 animate-bounce'
+              />
             </div>
           </div>
 
